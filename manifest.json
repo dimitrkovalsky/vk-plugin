@@ -1,0 +1,32 @@
+{
+   "background": {
+      "scripts": [ "assets/js/ls.js", "bg.js" ]
+   },
+   "browser_action": {
+      "default_icon": "assets/icon/128.png"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "css": [ "assets/css/vk-saver_style.css" ],
+      "matches": [ "http://www.vk.com/*", "http://vk.com/*", "https://vk.com/*", "https://www.vk.com/*" ],
+      "run_at": "document_start"
+   }, {
+      "all_frames": false,
+      "js": [ "assets/js/jquery.js", "assets/js/fileSaver.min.js", "bg.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Download music from vk.com!",
+   "icons": {
+      "128": "assets/icon/128.png",
+      "16": "assets/icon/16.png",
+      "48": "assets/icon/48.png"
+   },
+   "manifest_version": 2,
+   "name": "VK Downloader",
+   "permissions": [ "http://*/*", "https://*/*", "storage", "downloads", "webRequest", "tabs" ],
+   "short_name": "VK Downloader",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.0",
+   "web_accessible_resources": [ "*" ]
+}

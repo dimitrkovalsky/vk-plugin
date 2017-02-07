@@ -1,0 +1,24 @@
+.audio_inline_player {
+    margin-top: 0 !important;
+}
+
+.audio_play_wrap::after {
+    z-index: 1;
+}
+
+.at_audio {
+    background-image: url('https://new.vk.com/images/post_icon.png?2');
+    background-position: 1px -112px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    opacity: 0.4;
+    cursor: pointer;
+    height: 17px;
+    width: 20px;
+    float: left;
+    padding: 0 !important;
+}
+
+.at_audios:hover .at_audio {
+    opacity: 0.65;
+}

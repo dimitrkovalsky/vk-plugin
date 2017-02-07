@@ -1,0 +1,130 @@
+._at_save {
+    z-index: 1;
+    position: absolute;
+    top: 9px;
+    left: 29px;
+    width: 16px;
+    height: 16px;
+}
+.at_mod .audio_play, .audio_row ._at_save2 {
+    display: inline-block;
+}
+
+.audio_row ._at_save2 {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.current ._at_audio_info {
+    color: white;
+}
+
+._at_audio_info {
+    width: auto;
+    display: none;
+    position: absolute;
+    color: gray;
+    left: 20px;
+    font-size: 10px;
+    top: 17px;
+}
+._at_audio_info.show {
+    display: inline-block;
+}
+._at_settings, #bitrate {
+    cursor: pointer;
+}
+._at_settings.audio_filter {
+    height: inherit;
+}
+#vk-settings select {
+    font: 11px tahoma, verdana, arial, sans-serif;
+    border: 1px solid #C3CBD4;
+}
+#audio.new .audio .title_wrap {
+    padding-top: 3px;
+}
+._at_save:hover {
+    opacity: 0.7;
+}
+.wall_module ._at_save, #search_table ._at_save, #choose_audio_rows ._at_save {
+    top: 6px;
+    left: 25px;
+}
+.dob_saver {
+    background-repeat: no-repeat;
+    width:16px;
+    display:block;
+    height:16px;
+}
+.wall_text ._at_save, .search_media_rows ._at_save {
+    left: 26px;
+}
+
+._at-saver-video .idd_popup {
+    visibility: hidden;
+    opacity: 1;
+    top: -2px;
+    left: -10px;
+}
+
+._at-saver-video .idd_item:hover {
+    background: #e1e7ed
+}
+
+._at-saver-video {
+    position: relative;
+}
+
+._at-saver-video:hover .idd_popup {
+    visibility: visible
+}
+.idd_item.d-240, .idd_item.d-360, .idd_item.d-480, .idd_item.d-720 {
+    display: none
+}
+._at-saver-video .idd_item.d-240, ._at-saver-video .idd_item.d-360, ._at-saver-video .idd_item.d-480, ._at-saver-video .idd_item.d-720 {
+    display: block
+}
+._at_save_right.show {
+    display: block !important;
+}
+.audio_row ._at_save2.show {  display: inline-block;  }
+._at_save_right, .audio_row ._at_save2 {  display: none;  }
+.mod_remove_ads {  display: none !important;  }
+.photos_save_actions {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 8px;
+    padding: 3px;
+    border-radius: 2px;
+    -o-transition: opacity 60ms linear;
+    transition: opacity 60ms linear;
+    z-index: 2;
+    color: #fff;
+    background: rgba(0,0,0,.5);
+    font-size: 12.5px;
+    line-height: 0;
+    opacity: 0;
+    cursor: default;
+}
+.photos_save_actions>div {
+    cursor: pointer;
+    display: inline-block;
+    padding: 3px;
+    opacity: 0.7;
+    top: 0;
+}
+.photos_album:hover .photos_save_actions, .photos_photo_edit_row:hover .photos_save_actions, .photos_save_actions>div:hover {
+    opacity: 1;
+}
+.photos_save_actions .icon {
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.photos_album_save_actions {
+    display: inline-block;
+}
